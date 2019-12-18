@@ -1,18 +1,19 @@
 CC = gcc
 CFLAGS = -g -Wall 
 LIBRARIES = -lncurses
-SRCMODULES = snake.c  game.c
+SRCDIR = ./src/
+SRCMODULES = $(SRCDIR)snake.c  $(SRCDIR)game.c
 OBJMODULES = $(SRCMODULES:.c=.o)
 PROGNAME = snake
 
 %.o: %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(PROGNAME): main.c $(OBJMODULES) $(LIBRARIES)
+$(PROGNAME): $(SRCDIR)main.c $(OBJMODULES) $(LIBRARIES)
 	$(CC) $(CFLAGS) $^ -o $@
 
 run: $(PROGNAME)
 	./$(PROGNAME)
 
 clean:
-	rm -f *.o
+	rm -f $(SRCDIR)*.o
