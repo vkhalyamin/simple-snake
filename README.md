@@ -32,9 +32,11 @@ To build program, you can use build automation tool (Make):
 $ make snake
 ```
 
-## Authors
+## Author
 
-Khalyamin Vladimir (https://github.com/vkhalyamin)
+[Khalyamin Vladimir](https://github.com/vkhalyamin)
 
 ## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
