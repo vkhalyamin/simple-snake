@@ -1,6 +1,6 @@
 # SIMPLE SNAKE
 
-Simple snake game, written in C Programming Language and ncurses. GNU ncurses is a programming library that allows the users to create text-based user interfaces.
+Simple snake game, written in C programming language and ncurses. GNU ncurses is a programming library that allows the users to create text-based user interfaces.
 
 ## Getting Started
 
@@ -22,12 +22,12 @@ $ sudo apt-get install libncurses5-dev libncursesw5-dev
 
 ### Installing
 
-You can clone this repository with HTTPS:
+Clone this repository:
 ```
 $ git clone https://github.com/vkhalyamin/simple-snake.git
 ```
 
-To build program, you can use build automation tool (Make):
+Build this program, with Make:
 ```
 $ make snake
 ```
@@ -38,5 +38,4 @@ $ make snake
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details
-
+This project is licensed under the MIT License - see the LICENSE file for details.
