@@ -27,8 +27,9 @@ Clone this repository:
 $ git clone https://github.com/vkhalyamin/simple-snake.git
 ```
 
-Build this program, with Make:
+Build this program with Make:
 ```
+$ cd ./simple-snake
 $ make snake
 ```
 
