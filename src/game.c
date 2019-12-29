@@ -72,7 +72,7 @@ static int need_new_game(WINDOW *win)
 		key = wgetch(win);
 		if(key == ENTER_KEY || key == YES_KEY)
 			return 1;
-		if(key == NO_KEY)
+		if(key == NO_KEY || key == EXIT_KEY)
 			return 0;
 	}
 }
