@@ -33,10 +33,23 @@ $ cd ./simple-snake
 $ make snake
 ```
 
+## Usage
+
+The program supports some options:
+```
+    -s      set snake speed
+    -i      enable inverse control
+    -v      enable VIM control (h,j,k,l)
+```
+More info about options:
+```
+$ ./snake --help
+```
+
 ## Author
 
 [Khalyamin Vladimir](https://github.com/vkhalyamin)
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License &ndash; see the LICENSE file for details.
