@@ -13,6 +13,14 @@ enum {
 	NO_KEY    = 110			/* key "n" code */
 };
 
+struct game_params {
+	long snake_speed;		/* snake sleep time in microseconds (0,06s) */
+	int key_up;
+	int key_down;
+	int key_right;
+	int key_left;
+};
+
 int start_game();
 
 #endif
