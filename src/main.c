@@ -4,7 +4,7 @@
 
 const char small_screen_message[] = "Error! Your console screen is smaller than 80x24\nPlease resize your window and try again";
 const char color_error_message[] = "Your console does not support color";
-const char help_message[] = "USAGE: ./snake [OPTION]...\n\nOPTIONS:\n\t-s  -  set snake speed\n\t-i  -  inverse control\n\t-v  -  VIM contol (h,j,k,l)\n\nEXAMPLES:\n\t./snake -i -s1";
+const char help_message[] = "USAGE: ./snake [OPTION]...\n\nOPTIONS:\n\t-h, --help      show help\n\t-s, --speed     set snake speed\n\t-i, --inverse   inverse control\n\t-v, --vim       VIM contol (h,j,k,l)\n\nEXAMPLES:\n\t./snake -i -s1";
 
 int main(int argc, char **argv)
 {
