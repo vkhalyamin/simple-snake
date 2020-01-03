@@ -19,21 +19,25 @@ int main(int argc, char **argv)
 	if(argc > 1) {
 		int i;
 		for(i = 1; i < argc; i++) {
-			if((strcmp(argv[i], help_short_key) == 0) || (strcmp(argv[i], help_long_key) == 0))
+			if((strcmp(argv[i], help_short_key) == 0) || (strcmp(argv[i], help_long_key) == 0)) {
 				puts(help_message);
-			if((strcmp(argv[i], inverse_short_key) == 0) || (strcmp(argv[i], inverse_long_key) == 0))
+				continue;
+			}
+			if((strcmp(argv[i], inverse_short_key) == 0) || (strcmp(argv[i], inverse_long_key) == 0)) {
 				printf("INVERSE\n");
-			if((strcmp(argv[i], speed_short_key) == 0) || (strcmp(argv[i], speed_long_key) == 0))
+				continue;
+			}
+			if((strcmp(argv[i], speed_short_key) == 0) || (strcmp(argv[i], speed_long_key) == 0)) {
 				printf("SPEED\n");
-			
+				continue;
+			}
+			printf("snake: invalid option %s\nTry './snake --help' for more information.\n", argv[i]);
+			return 1;
 		}
-		endwin();
-		return 1;
 	}
 
 	initscr();
 	srand(time(NULL));
-
 
 	if(LINES < WIN_LINES || COLS < WIN_COLS) {
 		endwin();
