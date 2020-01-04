@@ -31,7 +31,6 @@ enum {
 };
 
 enum { SNAKE_COLOR = 1, FOOD_COLOR, OBSTACLE_COLOR };		  /* color pair numbers */
-enum { SNAKE_SPEED = 60000 };			/* snake sleep time in microseconds (0,06s) */
 
 void increase_snake(sn_element **tail);
 void move_snake(sn_element *tail, sn_element **head, sn_direction *dir);

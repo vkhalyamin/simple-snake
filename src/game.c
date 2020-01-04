@@ -1,5 +1,18 @@
 #include "game.h"
 
+void set_control_keys(g_params *params, int key_up, int key_down, int key_right, int key_left)
+{
+	params->key_up = key_up;
+	params->key_down = key_down;
+	params->key_right = key_right;
+	params->key_left = key_left;
+}
+
+void set_snake_speed(g_params *params, long snake_speed)
+{
+	params->snake_speed = snake_speed;
+}
+
 static void show_snake_food(WINDOW *win, sn_food *item)
 {
 	item->x = (1 + (int)(77.0*rand()/(RAND_MAX+1.0)));
@@ -20,25 +33,20 @@ static sn_element *make_start_snake(sn_element **head, sn_direction *dir)
 	return tail;
 }
 
-static void direction_handler(int key, sn_direction *dir)
+static void direction_handler(int key, g_params *params, sn_direction *dir)
 {
-	switch(key) {
-	case KEY_UP:
+	if(key == params->key_up) {
 		if(*dir != DOWN)
 			*dir = UP;
-		break; 
-	case KEY_DOWN:
+	} else if(key ==  params->key_down) {
 		if(*dir != UP)
 			*dir = DOWN;
-		break; 
-	case KEY_RIGHT:
+	} else if(key ==params->key_right) {
 		if(*dir != LEFT)
 			*dir = RIGHT;
-		break; 
-	case KEY_LEFT:
+	} else if (key == params->key_left) {
 		if(*dir != RIGHT)
 			*dir = LEFT;
-		break; 
 	}
 }
 
@@ -77,14 +85,14 @@ static int need_new_game(WINDOW *win)
 	}
 }
 
-int start_game()
+int start_game(g_params* params)
 {
 	int key, score = 0;
 	int next_game_status = 0;
 	sn_direction *dir = malloc(sizeof(*dir));
 	sn_food *food = malloc(sizeof(*food));
 	sn_element *head = malloc(sizeof(*head));
-    sn_element *tail = make_start_snake(&head, dir);
+	sn_element *tail = make_start_snake(&head, dir);
 
 	WINDOW* win = newwin(WIN_LINES, WIN_COLS, (LINES-WIN_LINES)/2, (COLS-WIN_COLS)/2);
 	win_setup(win);
@@ -98,7 +106,7 @@ int start_game()
 			break;
 		}
 		clear_snake(win, tail);
-		direction_handler(key, dir);
+		direction_handler(key, params, dir);
 		
 		/* snake expansion and food generation */
 		if(is_food_eaten(tail, food)) {
@@ -124,7 +132,7 @@ int start_game()
 
 		show_snake(win, tail);
 		wrefresh(win);
-		usleep(SNAKE_SPEED);
+		usleep(params->snake_speed);
 	}
 
 	return next_game_status;
