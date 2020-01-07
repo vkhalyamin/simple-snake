@@ -18,6 +18,8 @@ const char speed_short_key[] = "-s";
 int main(int argc, char **argv)
 {
 	g_params *params = malloc(sizeof(*params));
+
+	/* set default game params */
 	set_snake_speed(params, DEFAULT_SNAKE_SPEED);
 	set_control_keys(params, KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT);
 
@@ -33,7 +35,7 @@ int main(int argc, char **argv)
 				continue;
 			}
 			if((strcmp(argv[i], vimcontrol_short_key) == 0) || (strcmp(argv[i], vimcontrol_long_key) == 0)) {
-				set_control_keys(params, 107, 106, 108, 104);
+				set_control_keys(params, 107, 106, 108, 104); /* h, j, k, l keys */
 				continue;
 			}
 			if((strcmp(argv[i], speed_short_key) == 0) || (strcmp(argv[i], speed_long_key) == 0)) {
