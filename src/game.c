@@ -56,7 +56,8 @@ static int read_prev_record(FILE *f)
 	f = fopen("./.simple_snake", "r+");
 	if(!f) {
 		f = fopen("./.simple_snake", "w+");
-		fputc('0', f);
+		fclose(f);
+		return 0;
 	}
 	fscanf(f, "%d", &record);
 	fclose(f);
@@ -85,8 +86,8 @@ static void win_setup(WINDOW *win, int record)
 	wmove(win, WIN_LINES-3, 0);
 	whline(win, 0, WIN_COLS);
 	mvwaddstr(win, WIN_LINES-2, WIN_COLS-14, "Simple Snake");
-	mvwaddstr(win, WIN_LINES-2, WIN_COLS-78, "Score: 0");
-	mvwprintw(win, WIN_LINES-2, WIN_COLS/2 - 4, "Best: %d", record);
+	mvwaddstr(win, WIN_LINES-2, WIN_COLS/2 - 5, "Score: 0");
+	mvwprintw(win, WIN_LINES-2, WIN_COLS-78, "Best: %d", record);
 	box(win, 0, 0);
 }
 
@@ -121,7 +122,6 @@ int start_game(g_params* params)
 	WINDOW* win = newwin(WIN_LINES, WIN_COLS, (LINES-WIN_LINES)/2, (COLS-WIN_COLS)/2);
 	win_setup(win, record);
 
-
 	show_snake_food(win, food);
 	
 	while(1) {
@@ -140,8 +140,8 @@ int start_game(g_params* params)
 			score += 10;
 			if(score > record)
 				record = score;
-			mvwprintw(win, WIN_LINES-2, WIN_COLS-71, "%d    ", score);
-			mvwprintw(win, WIN_LINES-2, WIN_COLS/2 + 2, "%d    ", record);
+			mvwprintw(win, WIN_LINES-2, WIN_COLS/2 + 2, "%d    ", score);
+			mvwprintw(win, WIN_LINES-2, WIN_COLS-72, "%d    ", record);
 		}
 
 		move_snake(tail, &head, dir);
