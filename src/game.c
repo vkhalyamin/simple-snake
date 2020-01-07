@@ -50,7 +50,27 @@ static void direction_handler(int key, g_params *params, sn_direction *dir)
 	}
 }
 
-static void win_setup(WINDOW *win)
+static int read_prev_record(FILE *f)
+{
+	int record;
+	f = fopen("./.simple_snake", "r+");
+	if(!f) {
+		f = fopen("./.simple_snake", "w+");
+		fputc('0', f);
+	}
+	fscanf(f, "%d", &record);
+	fclose(f);
+	return record;
+}
+
+static void write_current_record(FILE *f, int record)
+{
+	f = fopen("./.simple_snake", "r+");
+	fprintf(f, "%d", record);
+	fclose(f);
+}
+
+static void win_setup(WINDOW *win, int record)
 {
 	start_color();
 	init_pair(SNAKE_COLOR, COLOR_GREEN, COLOR_BLACK);
@@ -66,6 +86,7 @@ static void win_setup(WINDOW *win)
 	whline(win, 0, WIN_COLS);
 	mvwaddstr(win, WIN_LINES-2, WIN_COLS-14, "Simple Snake");
 	mvwaddstr(win, WIN_LINES-2, WIN_COLS-78, "Score: 0");
+	mvwprintw(win, WIN_LINES-2, WIN_COLS/2 - 4, "Best: %d", record);
 	box(win, 0, 0);
 }
 
@@ -87,15 +108,19 @@ static int need_new_game(WINDOW *win)
 
 int start_game(g_params* params)
 {
-	int key, score = 0;
+	int key, record, score = 0;
 	int next_game_status = 0;
 	sn_direction *dir = malloc(sizeof(*dir));
 	sn_food *food = malloc(sizeof(*food));
 	sn_element *head = malloc(sizeof(*head));
 	sn_element *tail = make_start_snake(&head, dir);
 
+	FILE *f = NULL;
+
+	record = read_prev_record(f);
 	WINDOW* win = newwin(WIN_LINES, WIN_COLS, (LINES-WIN_LINES)/2, (COLS-WIN_COLS)/2);
-	win_setup(win);
+	win_setup(win, record);
+
 
 	show_snake_food(win, food);
 	
@@ -113,7 +138,10 @@ int start_game(g_params* params)
 			increase_snake(&tail);
 			show_snake_food(win, food);
 			score += 10;
+			if(score > record)
+				record = score;
 			mvwprintw(win, WIN_LINES-2, WIN_COLS-71, "%d    ", score);
+			mvwprintw(win, WIN_LINES-2, WIN_COLS/2 + 2, "%d    ", record);
 		}
 
 		move_snake(tail, &head, dir);
@@ -135,5 +163,6 @@ int start_game(g_params* params)
 		usleep(params->snake_speed);
 	}
 
+	write_current_record(f, record);
 	return next_game_status;
 }
