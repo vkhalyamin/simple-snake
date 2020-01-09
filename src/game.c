@@ -56,10 +56,11 @@ static int read_prev_record(FILE *f)
 	f = fopen("./.simple_snake", "r+");
 	if(!f) {
 		f = fopen("./.simple_snake", "w+");
-		fclose(f);
-		return 0;
+		record = 0;
 	}
-	fscanf(f, "%d", &record);
+	else {
+		fscanf(f, "%d", &record);
+	}
 	fclose(f);
 	return record;
 }
