@@ -37,9 +37,9 @@ $ make snake
 
 The program supports some options:
 ```
-    -s      set snake speed
-    -i      enable inverse control
-    -v      enable VIM control (h,j,k,l)
+-s      set snake speed-level
+-i      enable inverse control
+-v      enable VIM control (h,j,k,l)
 ```
 More info about options:
 ```
@@ -48,7 +48,7 @@ $ ./snake --help
 
 ## Author
 
-[Khalyamin Vladimir](https://github.com/vkhalyamin)
+[Khalyamin Vladimir](https://github.com/vkhalyamin) - vkhalyamin(at)protonmail.com
 
 ## License
 
