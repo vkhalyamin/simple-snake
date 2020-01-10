@@ -1,5 +1,36 @@
 #include "game.h"
 
+long int get_speed_value(char **argv, int arg_number)
+{
+	int speed_level;		/* speed-level from next argument */
+	int speed_status = 0;		/* is speed-level correct (speed = 1 ... 10) */
+	int j;
+	speed_level = atoi(argv[arg_number+1]);
+	for(j = 1; j <= 10; j++)	/* check speed-level for correctness */
+		if(speed_level == j) speed_status = 1;
+	if(!speed_status) {
+		printf("snake: invalid speed-level: %s\nTry './snake --help' for more information.\n", argv[arg_number+1]);
+		exit(2);
+	}
+	return calculate_snake_speed(speed_level);
+}
+
+long int calculate_snake_speed(int speed_level)
+{
+	switch(speed_level) {
+		case LEVEL_1: return SNAKE_SPEED_1;
+		case LEVEL_2: return SNAKE_SPEED_2;
+		case LEVEL_3: return SNAKE_SPEED_3;
+		case LEVEL_4: return SNAKE_SPEED_4;
+		case LEVEL_5: return SNAKE_SPEED_5;
+		case LEVEL_6: return SNAKE_SPEED_6;
+		case LEVEL_7: return SNAKE_SPEED_7;
+		case LEVEL_8: return SNAKE_SPEED_8;
+		case LEVEL_9: return SNAKE_SPEED_9;
+		case LEVEL_10: return SNAKE_SPEED_10;
+		default: return SNAKE_SPEED_DEFAULT;
+	}
+}
 void set_control_keys(g_params *params, int key_up, int key_down, int key_right, int key_left)
 {
 	params->key_up = key_up;
