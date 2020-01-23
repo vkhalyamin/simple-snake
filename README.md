@@ -48,7 +48,7 @@ $ ./snake --help
 
 ## Author
 
-[Khalyamin Vladimir](https://github.com/vkhalyamin) - vkhalyamin(at)protonmail.com
+[Khalyamin Vladimir](https://github.com/vkhalyamin) &ndash; vkhalyamin@protonmail.com
 
 ## License
 
