@@ -23,14 +23,14 @@ struct snake_food {
 };
 
 /* initial snake parameters */
-enum {
+enum init_params {
 	start_X = 30,
 	start_Y = 11,
 	start_size = 5,
 	start_direction = RIGHT
 };
 
-enum { SNAKE_COLOR = 1, FOOD_COLOR, OBSTACLE_COLOR };		  /* color pair numbers */
+enum colors { SNAKE_COLOR = 1, FOOD_COLOR, OBSTACLE_COLOR };		  /* color pair numbers */
 
 void increase_snake(sn_element **tail);
 void move_snake(sn_element *tail, sn_element **head, sn_direction *dir);

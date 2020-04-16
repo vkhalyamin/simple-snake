@@ -2,18 +2,22 @@
 #include <string.h>
 #include "game.h"
 
-const char small_screen_message[] = "Error! Your console screen is smaller than 80x24\nPlease resize your window and try again";
 const char color_error_message[] = "Your console does not support color";
-const char help_message[] = "USAGE: ./snake [OPTION]...\n\nOPTIONS:\n\t-h, --help      show help\n\t-s, --speed     set snake speed-level (1...10)\n\t-i, --inverse   inverse control\n\t-v, --vim       VIM contol (h,j,k,l)\n\nEXAMPLES:\n\t./snake -i -s 5";
+const char small_screen_message[] = "Error! Your console screen is smaller than \
+				     80x24\nPlease resize your window and try again";
+const char help_message[] = "USAGE: ./snake [OPTION]...\n\nOPTIONS:\n\t-h, --help\
+	show help\n\t-s, --speed     set snake speed-level \
+	 (1...10)\n\t-i, --inverse   inverse control\n\t-v, --vim\
+  	 VIM contol (h,j,k,l)\n\nEXAMPLES:\n\t./snake -i -s 5";
 
-const char help_long_key[] = "--help";
-const char help_short_key[] = "-h";
-const char inverse_long_key[] = "--inverse";
-const char inverse_short_key[] = "-i";
-const char vimcontrol_long_key[] = "--vim";
-const char vimcontrol_short_key[] = "-v";
-const char speed_long_key[] = "--speed";
-const char speed_short_key[] = "-s";
+const char help_long_key[] 		= "--help";
+const char help_short_key[] 		= "-h";
+const char inverse_long_key[] 		= "--inverse";
+const char inverse_short_key[]		= "-i";
+const char vimcontrol_long_key[]	= "--vim";
+const char vimcontrol_short_key[]  	= "-v";
+const char speed_long_key[] 		= "--speed";
+const char speed_short_key[] 		= "-s";
 
 int main(int argc, char **argv)
 {
@@ -26,22 +30,22 @@ int main(int argc, char **argv)
 	if(argc > 1) {
 		int i;
 		for(i = 1; i < argc; i++) {
-			if((strcmp(argv[i], help_short_key) == 0) || (strcmp(argv[i], help_long_key) == 0)) {
+			if(!(strcmp(argv[i], help_short_key)) || !(strcmp(argv[i], help_long_key))) {
 				puts(help_message);
 				return 1;
 			}
-			if((strcmp(argv[i], inverse_short_key) == 0) || (strcmp(argv[i], inverse_long_key) == 0)) {
+			if(!(strcmp(argv[i], inverse_short_key)) || !(strcmp(argv[i], inverse_long_key))) {
 				set_control_keys(params, KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT);
 				continue;
 			}
-			if((strcmp(argv[i], vimcontrol_short_key) == 0) || (strcmp(argv[i], vimcontrol_long_key) == 0)) {
-				set_control_keys(params, 107, 106, 108, 104); /* h, j, k, l key codes */
+			if(!(strcmp(argv[i], vimcontrol_short_key)) || !(strcmp(argv[i], vimcontrol_long_key))) {
+				set_control_keys(params, VIM_UP, VIM_DOWN, VIM_RIGHT, VIM_LEFT);
 				continue;
 			}
-			if((strcmp(argv[i], speed_short_key) == 0) || (strcmp(argv[i], speed_long_key) == 0)) {
-				if(argv[i+1] == NULL)		/* if there isn't next speed-level argument */
+			if(!(strcmp(argv[i], speed_short_key)) || !(strcmp(argv[i], speed_long_key))) {
+				if(!argv[i+1])		/* if there isn't next speed-level argument */
 					continue;		/* skip this action */
-				int speed_value = get_speed_value(argv, i);	/* read speed level from argv */
+				enum speed speed_value = get_speed_value(argv, i);	/* read speed level from argv */
 				set_snake_speed(params, speed_value);
 				i++;
 				continue;
@@ -64,10 +68,11 @@ int main(int argc, char **argv)
 	if (has_colors() == FALSE) {
 		endwin();
 		puts(color_error_message);
-		exit(1);
+		exit(2);
 	}
 
-	while(start_game(params)) {}
+	while(start_game(params))
+	{}
 
 	free(params);
 	endwin();

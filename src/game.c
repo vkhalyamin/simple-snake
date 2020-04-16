@@ -1,8 +1,8 @@
 #include "game.h"
 
-long int get_speed_value(char **argv, int arg_number)
+enum speed get_speed_value(char **argv, int arg_number)
 {
-	int speed_level;		/* speed-level from next argument */
+	enum level speed_level;		/* speed-level from next argument */
 	int speed_status = 0;		/* is speed-level correct (speed = 1 ... 10) */
 	int j;
 	speed_level = atoi(argv[arg_number+1]);
@@ -15,7 +15,7 @@ long int get_speed_value(char **argv, int arg_number)
 	return calculate_snake_speed(speed_level);
 }
 
-long int calculate_snake_speed(int speed_level)
+enum speed calculate_snake_speed(enum level speed_level)
 {
 	switch(speed_level) {
 		case LEVEL_1: return SNAKE_SPEED_1;
@@ -39,7 +39,7 @@ void set_control_keys(g_params *params, int key_up, int key_down, int key_right,
 	params->key_left = key_left;
 }
 
-void set_snake_speed(g_params *params, long snake_speed)
+void set_snake_speed(g_params *params, enum speed snake_speed)
 {
 	params->snake_speed = snake_speed;
 }

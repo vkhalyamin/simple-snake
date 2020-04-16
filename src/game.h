@@ -6,11 +6,22 @@
 
 typedef struct game_params g_params;
 
-enum { WIN_LINES = 24, WIN_COLS = 80 };		/* main window size */
+enum window_size { WIN_LINES = 24, WIN_COLS = 80 };		/* main window size */
 
-enum { LEVEL_1 = 1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5, LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, LEVEL_10 };	/* level numbers */
+enum level { /* level numbers */
+	LEVEL_1 = 1,
+	LEVEL_2,
+	LEVEL_3,
+	LEVEL_4,
+	LEVEL_5,
+	LEVEL_6,
+	LEVEL_7,
+	LEVEL_8,
+	LEVEL_9,
+	LEVEL_10
+};
 
-enum {
+enum speed {
 	SNAKE_SPEED_DEFAULT = 60000,	/* default snake sleep time (0,06s)	*/
 	SNAKE_SPEED_1 = 200000,		/* level 1 snake sleep time (0,2s)	*/
 	SNAKE_SPEED_2 = 150000,		/* level 2 snake sleep time (0,15s)	*/
@@ -23,11 +34,20 @@ enum {
 	SNAKE_SPEED_9 = 45000,		/* level 9 snake sleep time (0,045s)	*/
 	SNAKE_SPEED_10 = 40000,		/* level 10 snake sleep time (0,04s)	*/
 };	
-enum {
+
+enum keys {
 	ENTER_KEY = 10,
 	EXIT_KEY  = 113,		/* key "q" code */
 	YES_KEY   = 121,		/* key "y" code */
 	NO_KEY    = 110			/* key "n" code */
+};
+
+/* standart VIM keys for snake control */
+enum vim_keys {
+	VIM_UP = 107,			/* key "k" code */
+	VIM_DOWN = 106,			/* key "j" code */
+	VIM_RIGHT = 108,		/* key "l" code */
+	VIM_LEFT = 104			/* key "h" code */
 };
 
 struct game_params {
@@ -41,8 +61,8 @@ struct game_params {
 int start_game(g_params* params);
 
 void set_control_keys(g_params *params, int key_up, int key_down, int key_right, int key_left);
-void set_snake_speed(g_params *params, long snake_speed);
-long int get_speed_value(char **argv, int arg_number);
-long int calculate_snake_speed(int speed_level);
+void set_snake_speed(g_params *params, enum speed snake_speed);
+enum speed get_speed_value(char **argv, int arg_number);
+enum speed calculate_snake_speed(enum level speed_level);
 
 #endif
